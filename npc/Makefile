@@ -1,5 +1,5 @@
 VCODE = $(wildcard ./vsrc/top.v)
-CCODE = $(wildcard ./csrc/sim_top.cpp)
+CCODE = $(wildcard ./csrc/sim_vcd.cpp)
 
 ifeq ($(VERILATOR_ROOT),)
 VERILATOR = verilator
