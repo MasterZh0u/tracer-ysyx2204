@@ -1,3 +1,10 @@
+ifeq ($(VERILATOR_ROOT),)
+VERILATOR = verilator
+else
+export VERILATOR_ROOT
+VERILATOR = $(VERILATOR_ROOT)/bin/verilator
+endif
+
 all:
 	@echo "Write this Makefile by your self."
 
