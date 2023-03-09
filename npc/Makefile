@@ -1,3 +1,6 @@
+VCODE = $(wildcard ./vsrc/top.v)
+CCODE = $(wildcard ./csrc/sim_top.cpp)
+
 ifeq ($(VERILATOR_ROOT),)
 VERILATOR = verilator
 else
@@ -11,6 +14,6 @@ all:
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	$(VERILATOR) -cc --exe --build -j top.v sim_vcd.cpp --trace
+	$(VERILATOR) -cc --exe --build -j $(VCODE) $(CCODE) --trace
 	
 include ../Makefile
