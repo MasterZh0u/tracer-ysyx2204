@@ -90,6 +90,7 @@ static int cmd_x(char *args){
   sscanf(EXPR,"%lx",&addr1);
   for(int i=0; i<n2; i++){
     printf("%08lx:%ld\n",addr1, vaddr_read(addr1,4));
+    addr1 += 4;
   }
   return 0;
 }
