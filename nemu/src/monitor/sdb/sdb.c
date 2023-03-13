@@ -84,11 +84,12 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
   char *N = strtok(NULL, " ");
   char *EXPR = strtok(NULL, " ");
-  int n2, idx;
+  int n2;
+  vaddr_t addr1;
   sscanf(N,"%d",&n2);
-  sscanf(EXPR,"%d",&idx);
+  sscanf(EXPR,"%lx",&addr1);
   for(int i=0; i<n2; i++){
-    printf("%08x:%ld",idx, vaddr_read(idx,4));
+    printf("%08lx:%ld",addr1, vaddr_read(addr1,4));
   }
   return 0;
 }
