@@ -12,7 +12,7 @@
 *
 * See the Mulan PSL v2 for more details.
 ***************************************************************************************/
-
+#include <memory/vaddr.h>
 #include <isa.h>
 #include <cpu/cpu.h>
 #include <readline/readline.h>
@@ -72,19 +72,24 @@ static int cmd_si(char *args){
 }
 
 static int cmd_info(char *args){
-  printf("------\n");
+  // printf("------\n");
   char *arg = strtok(NULL, " ");
-  printf("%s\n", arg);
+  // printf("%s\n", arg);
   if(strcmp(arg, "r") == 0){
     isa_reg_display();
-  }else if(arg == NULL){
-    return 0;
   }
   return 0;
 }
 
 static int cmd_x(char *args){
-  
+  char *N = strtok(NULL, " ");
+  char *EXPR = strtok(NULL, " ");
+  int n2, idx;
+  sscanf(N,"%d",&n2);
+  sscanf(EXPR,"%d",&idx);
+  for(int i=0; i<n2; i++){
+    printf("%08x:%ld",idx, vaddr_read(idx,4));
+  }
   return 0;
 }
 
