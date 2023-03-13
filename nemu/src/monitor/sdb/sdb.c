@@ -72,7 +72,29 @@ static int cmd_si(char *args){
 }
 
 static int cmd_info(char *args){
-  isa_reg_display();
+  char *arg = strtok(NULL, " ");
+  if(strcmp(arg, "r") == 0){
+    isa_reg_display();
+  }
+  return 0;
+}
+
+static int cmd_x(char *args){
+  
+  return 0;
+}
+
+static int cmd_p(char *args){
+
+  return 0;
+}
+
+static int cmd_w(char *args){
+
+  return 0;
+}
+
+static int cmd_d(char *args){
   return 0;
 }
 
@@ -88,10 +110,10 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Exit N instructions then nemu_stata parse to STOP", cmd_si },
   { "info", "Print the information of registers", cmd_info },
-  {},
-  {},
-  {},
-  {}
+  { "x", "Print the memory information", cmd_x},
+  { "p", "Expression evaluation", cmd_p},
+  { "w", "Set the monitor point", cmd_w},
+  { "d", "Delete the monitor point", cmd_d}
   /* TODO: Add more commands */
 
 };
