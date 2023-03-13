@@ -54,6 +54,16 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args){
+  char *arg = strtok(NULL, " ");
+  int steps = 0;
+  if(arg == NULL){
+    cpu_exec(-1);
+    return 0;
+  }
+  sscanf("arg","%d",&steps);
+  if(steps <= 0){
+    printf("Error, ");
+  }
   return 0;
 }
 
