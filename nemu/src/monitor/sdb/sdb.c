@@ -57,13 +57,15 @@ static int cmd_si(char *args){
   char *arg = strtok(NULL, " ");
   int steps = 0;
   if(arg == NULL){
-    cpu_exec(-1);
+    cpu_exec(1);
     return 0;
   }
   sscanf("arg","%d",&steps);
   if(steps <= 0){
-    printf("Error, ");
+    printf("Error, please enter right number!\n");
+    return 0;
   }
+  cpu_exec(steps);
   return 0;
 }
 
