@@ -74,6 +74,7 @@ static int cmd_si(char *args){
 static int cmd_info(char *args){
   printf("------\n");
   char *arg = strtok(NULL, " ");
+  printf("%s\n", arg);
   if(strcmp(arg, "r") == 0){
     isa_reg_display();
   }else if(arg == NULL){
