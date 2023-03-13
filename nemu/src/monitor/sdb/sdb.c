@@ -61,8 +61,8 @@ static int cmd_si(char *args){
     return 0;
   }
   // printf("%s\n", arg);
-  sscanf("arg","%d",&steps);
-  printf("%d\n", steps);
+  sscanf(arg,"%d",&steps);
+  // printf("%d\n", steps);
   if(steps <= 0){
     printf("Error, please enter right number!\n");
     return 0;
