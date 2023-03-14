@@ -90,13 +90,16 @@ static int cmd_x(char *args){
   sscanf(EXPR,"%lx",&addr1);
   for(int i=0; i<n2; i++){
     printf("0x%08lx:%08lx\n",addr1, vaddr_read(addr1,4));
-    addr1 += 8;
+    addr1 += 4;
   }
   return 0;
 }
 
 static int cmd_p(char *args){
-
+  bool success;
+  uint32_t v = expr(args, &success);
+  if (success)
+    printf("%s = \e[1;36m%#.8x\e[0m\n", args, v);
   return 0;
 }
 
