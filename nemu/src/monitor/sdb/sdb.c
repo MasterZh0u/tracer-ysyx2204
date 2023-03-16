@@ -18,7 +18,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
-
+#include "watchpoint.c"
 static int is_batch_mode = false;
 
 void init_regex();
@@ -104,7 +104,13 @@ static int cmd_p(char *args){
 }
 
 static int cmd_w(char *args){
-
+  bool success = true;
+  WP *point = new_wp(args, &success);
+  if (!success){
+    printf("Some thing wrong happend.\n");
+  }else {
+    printf("Created a \e[1;36mWatchPoint(NO.%d)\e[0m: %s \n", point->NO, point->condation);
+  }
   return 0;
 }
 
