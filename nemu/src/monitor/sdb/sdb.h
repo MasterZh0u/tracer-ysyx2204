@@ -28,4 +28,5 @@ typedef struct watchpoint {
 word_t expr(char *e, bool *success);
 WP* new_wp(char *condation, bool *success);
 void watchpoint_display();
+void free_wp(int NO);
 #endif
