@@ -19,7 +19,7 @@
 #include <common.h>
 typedef struct watchpoint {
   int NO;
-  char *condation;
+  char condation[6];
   struct watchpoint *next;
 
   /* TODO: Add more members if necessary */
