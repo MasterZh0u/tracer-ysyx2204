@@ -12,12 +12,13 @@
 *
 * See the Mulan PSL v2 for more details.
 ***************************************************************************************/
-#include <memory/vaddr.h>
+
 #include <isa.h>
 #include <cpu/cpu.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+
 static int is_batch_mode = false;
 
 void init_regex();
@@ -48,78 +49,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
-  set_nemu_state(4,0,0);
   return -1;
-}
-
-static int cmd_si(char *args){
-  char *arg = strtok(NULL, " ");
-  int steps = 0;
-  if(arg == NULL){
-    cpu_exec(1);
-    return 0;
-  }
-  // printf("%s\n", arg);
-  sscanf(arg,"%d",&steps);
-  // printf("%d\n", steps);
-  if(steps <= 0){
-    printf("Error, please enter right number!\n");
-    return 0;
-  }
-  cpu_exec(steps);
-  return 0;
-}
-
-static int cmd_info(char *args){
-  // printf("------\n");
-  char *arg = strtok(NULL, " ");
-  // printf("%s\n", arg);
-  if(strcmp(arg, "r") == 0){
-    isa_reg_display();
-  } else if (strcmp(arg, "w") == 0) {
-    watchpoint_display();
-  }
-  return 0;
-}
-
-static int cmd_x(char *args){
-  char *N = strtok(NULL, " ");
-  char *EXPR = strtok(NULL, " ");
-  int n2;
-  vaddr_t addr1;
-  sscanf(N,"%d",&n2);
-  sscanf(EXPR,"%lx",&addr1);
-  for(int i=0; i<n2; i++){
-    printf("0x%08lx:%08lx\n",addr1, vaddr_read(addr1,4));
-    addr1 += 4;
-  }
-  return 0;
-}
-
-static int cmd_p(char *args){
-  bool success;
-  uint32_t v = expr(args, &success);
-  if (success)
-    printf("%s = \e[1;36m%#.8x\e[0m\n", args, v);
-  return 0;
-}
-
-static int cmd_w(char *args){
-  bool success = true;
-  WP *point = new_wp(args, &success);
-  if (!success){
-    printf("Some thing wrong happend.\n");
-  }else {
-    printf("Created a \e[1;36mWatchPoint(NO.%d)\e[0m: %s \n", point->NO, point->condation);
-  }
-  return 0;
-}
-
-static int cmd_d(char *args){
-  int NO;
-  sscanf(args, "%d", &NO);
-  free_wp(NO);
-  return 0;
 }
 
 static int cmd_help(char *args);
@@ -132,12 +62,7 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "Exit N instructions then nemu_stata parse to STOP", cmd_si },
-  { "info", "Print the information of registers", cmd_info },
-  { "x", "Print the memory information", cmd_x},
-  { "p", "Expression evaluation", cmd_p},
-  { "w", "Set the monitor point", cmd_w},
-  { "d", "Delete the monitor point", cmd_d}
+
   /* TODO: Add more commands */
 
 };
